@@ -60,7 +60,15 @@ app.get('/weather', (req, res) => {
             } else if (latitude) {
                 forecast(latitude, longitude, (error, response) => {
                     res.send({
-                        forecast: error || response,
+                        error,
+                        forecast: {
+                            temperature: response.temperature,
+                            feelsLike: response.feelsLike,
+                            precip: response.precip,
+                            tempHigh: response.tempHigh,
+                            tempLow: response.tempLow,
+                            summary: response.summary,
+                        },
                         location,
                         address: req.query.address,
                     });

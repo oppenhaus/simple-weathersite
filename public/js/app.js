@@ -7,7 +7,10 @@ weatherForm.addEventListener('submit', (event) => {
     fetch(`/weather?address=${location}`).then((response) => {
         response.json().then((data) => {
             document.querySelector('#location-name').textContent = data.location;
-            document.querySelector('#location-forecast').textContent = data.forecast;
+            console.log(data)
+            document.querySelector('#location-forecast').textContent = `Daily Summary: ${data.forecast.summary}`
+            document.querySelector('#location-details').textContent = `
+            It currently feels like ${data.forecast.feelsLike} degrees with a high and low today of ${data.forecast.tempHigh} and ${data.forecast.tempLow}.`;
         })
     })
 })
